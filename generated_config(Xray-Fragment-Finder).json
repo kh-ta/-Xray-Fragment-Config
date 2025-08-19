@@ -16,12 +16,12 @@
         "google.com"
       ]
     },
-"servers": [
-  "https://cloudflare-dns.com/dns-query",
-  "https://dns.google/dns-query",
-  "https://protective.joindns4.eu/dns-query",
-  "https://dns.adguard-dns.com/dns-query"
-]
+    "servers": [
+      "https://cloudflare-dns.com/dns-query",
+      "https://dns.google/dns-query",
+      "https://protective.joindns4.eu/dns-query",
+      "https://dns.adguard-dns.com/dns-query"
+    ]
   },
   "inbounds": [
     {
@@ -141,7 +141,13 @@
         "concurrency": 8,
         "enabled": false
       }
+    },
+    //************* START OF ADDED SECTION 1*************
+    {
+      "protocol": "freedom",
+      "tag": "direct"
     }
+    // ************* END OF ADDED SECTION 1 *************
   ],
   "policy": {
     "levels": {
@@ -160,6 +166,18 @@
   "routing": {
     "domainStrategy": "IPIfNonMatch",
     "rules": [
+      // ************* START OF ADDED SECTION 2 *************
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": [
+            "geosite:ir",
+            "digikala.com",
+            "m.easytrader.ir",
+            "snapp.ir"
+]
+      },
+      // ************* END OF ADDED SECTION 2 *************
       {
         "inboundTag": [
           "socks-in",
@@ -184,6 +202,4 @@
     "strategy": "rules"
   },
   "stats": {}
-
 }
-
